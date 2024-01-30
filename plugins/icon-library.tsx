@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-// @ts-expect-error
-import type { Plugin } from "remix-development-tools";
-// TODO Replace these with your own toast library
-//import { toast } from "react-toastify";
-// TODO Replace these with your own array of all icon names available through a project, either generate through a script or use epic-stack script
-
-const iconNames: any = [];
-// TODO Import this type from your icon component
-interface IconProps {
-  name: string;
-  size: "sm" | "md" | "lg" | "xl";
-  className?: string;
-  onClick?: () => void;
-}
-// TODO Import your icon component
-const Icon = (props: IconProps) => {
-  return <div></div>;
-};
+import { iconNames } from "~/library/icon/icons/types";
+import { Icon, IconProps } from "~/library/icon/Icon";
 
 // Icon Library part
 // Allows you to copy an icon with a toast notification, modify the code to fit your needs
@@ -44,8 +28,7 @@ const ClickableIcon = ({ name, size, ...props }: IconProps) => {
         props.className,
         clicked ? "text-green-500" : "hover:cursor-pointer"
       )}
-      // TODO Replace with your own icon to be shown when clicked / remove entirely
-      name={clicked ? "check" : name}
+      name={clicked ? "ShoppingCart" : name}
       size={size}
       onClick={copyIcon}
     />
@@ -87,10 +70,8 @@ const IconLibrary = () => {
   );
 };
 
-// TODO Import this into your root.tsx and call it inside of the plugins array for RemixDevTools
-export const iconLibraryPlugin: Plugin = () => ({
-  // TODO Replace with your own icon
-  icon: <Icon name="camera" size="sm" />,
+export const iconLibraryPlugin = () => ({
+  icon: <Icon name="ShoppingCart" size="sm" />,
   component: <IconLibrary />,
   name: "Icon Library",
   id: "icon-library",
