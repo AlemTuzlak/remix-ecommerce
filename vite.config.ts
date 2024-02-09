@@ -4,14 +4,5 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { remixDevTools } from "remix-development-tools/vite";
 
 export default defineConfig({
-  plugins: [
-    remix(),
-    tsconfigPaths(),
-    remixDevTools({
-      pluginDir: "./plugins",
-    }),
-  ],
-  server: {
-    open: true,
-  },
+  plugins: [remix(), tsconfigPaths(), remixDevTools()],
 });
