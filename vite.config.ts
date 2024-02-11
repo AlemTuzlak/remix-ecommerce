@@ -4,5 +4,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { remixDevTools } from "remix-development-tools/vite";
 
 export default defineConfig({
-  plugins: [remix(), tsconfigPaths(), remixDevTools()],
+  plugins: [remixDevTools(), remix(), tsconfigPaths()],
+  ssr: {
+    noExternal: ["remix-i18next"],
+  },
 });
