@@ -1,3 +1,4 @@
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -11,11 +12,18 @@ import { LoaderFunctionArgs, json } from "@remix-run/node";
 import i18next from "./localization/i18n.server";
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
+import { returnLanguageIfSupported } from "./localization/resource";
+import tailwindcss from "./tailwind.css?url";
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  let locale = await i18next.getLocale(request);
+export async function loader({ request, params }: LoaderFunctionArgs) {
+  const lang = returnLanguageIfSupported(params.lang);
+  let locale = lang ?? (await i18next.getLocale(request));
   return json({ locale });
 }
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: tailwindcss },
+];
 
 export let handle = {
   // In the handle export, we can add a i18n key with namespaces our route

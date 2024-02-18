@@ -26,6 +26,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.5",
+    "remix-custom-routes": "^1.0.1",
     "remix-i18next": "^5.5.0",
     "tailwind-merge": "^2.2.1"
   },
