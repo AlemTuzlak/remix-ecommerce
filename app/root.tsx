@@ -1,3 +1,4 @@
+import type { ActionFunctionArgs } from "@remix-run/node";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -14,10 +15,13 @@ import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next";
 import { returnLanguageIfSupported } from "./localization/resource";
 import tailwindcss from "./tailwind.css?url";
+import { prisma } from ".server/db";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const lang = returnLanguageIfSupported(params.lang);
   let locale = lang ?? (await i18next.getLocale(request));
+  const user = await prisma.user.findFirst();
+  console.log(user);
   return json({ locale });
 }
 
