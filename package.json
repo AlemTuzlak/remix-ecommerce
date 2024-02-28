@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "execute": "node --experimental-specifier-resolution=node --loader ./loader.js",
+    "execute": "node --no-warnings --experimental-specifier-resolution=node --loader ./loader.js",
     "script": "npm run execute scripts/setup.ts",
     "icons": "npm run script scripts/icons.ts",
     "build": "remix vite:build",
@@ -18,11 +18,11 @@
     "db:studio": "npm run script \"prisma studio\"",
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down db",
-    "pretest:i": "npm run db:up && npx prisma migrate deploy",
-    "test:i": "vitest run --config ./vitest.config.integration.ts",
+    "pretest:i": "npm run script \"npm run db:up && npx prisma migrate deploy\" test",
+    "test:i": "npm run script \"vitest run --config ./vitest.config.integration.ts\" test",
     "posttest:i": "npm run db:down",
-    "pretest:i:ui": "npm run db:up && npx prisma migrate deploy",
-    "test:i:ui": "vitest run --config ./vitest.config.integration.ts --ui --api 9527",
+    "pretest:i:ui": "npm run script \"npm run db:up && npx prisma migrate deploy\" test",
+    "test:i:ui": "npm run script \"vitest run --config ./vitest.config.integration.ts --ui --api 9527\" test",
     "posttest:i:ui": "npm run db:down"
   },
   "dependencies": {
