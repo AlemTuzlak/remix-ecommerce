@@ -9,15 +9,18 @@ import { iconsSpritesheet } from "vite-plugin-icons-spritesheet";
 export default defineConfig({
   plugins: [
     remixDevTools(),
+    remix({ routes, presets: [vercelPreset()] }),
+    tsconfigPaths(),
     iconsSpritesheet({
       inputDir: "./resources/icons",
       outputDir: "./app/library/icon/icons",
       withTypes: true,
       fileName: "icon.svg",
     }),
-    remix({ routes, presets: [vercelPreset()] }),
-    tsconfigPaths(),
   ],
+  define: {
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+  },
   ssr: {
     noExternal: ["remix-i18next"],
   },

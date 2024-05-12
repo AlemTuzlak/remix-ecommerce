@@ -16,12 +16,14 @@ import { useChangeLanguage } from "remix-i18next/react";
 import { returnLanguageIfSupported } from "./localization/resource";
 import tailwindcss from "./tailwind.css?url";
 import sprite from "./library/icon/icons/icon.svg?url";
+import { getClientEnv } from "./.server/env.server";
+import { useEffect } from "react";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const lang = returnLanguageIfSupported(params.lang);
   let locale = lang ?? (await i18next.getLocale(request));
-
-  return json({ locale });
+  const clientEnv = getClientEnv();
+  return json({ locale, clientEnv });
 }
 
 export const links: LinksFunction = () => [
@@ -42,10 +44,19 @@ export let handle = {
   i18n: "common",
 };
 
+export const useClientEnv = () => {
+  return useLoaderData<typeof loader>().clientEnv;
+};
+
 export default function App() {
-  const { locale } = useLoaderData<typeof loader>();
+  const { locale, clientEnv } = useLoaderData<typeof loader>();
   const { i18n } = useTranslation();
   useChangeLanguage(locale);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.env = clientEnv;
+  }, [clientEnv]);
 
   return (
     <html lang={locale} dir={i18n.dir()}>

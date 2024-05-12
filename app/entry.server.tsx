@@ -1,5 +1,4 @@
 import { PassThrough } from "stream";
-import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/web-fetch";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
@@ -11,8 +10,12 @@ import Backend from "i18next-fs-backend";
 import i18n from "./localization/i18n"; // your i18n configuration file
 import { resolve } from "node:path";
 import { resources, returnLanguageIfSupported } from "./localization/resource";
+import { initEnv } from "./.server/env.server";
+import { EntryContext } from "@remix-run/node";
 
 const ABORT_DELAY = 5000;
+// Initialize environment variables
+initEnv();
 
 export default async function handleRequest(
   request: Request,

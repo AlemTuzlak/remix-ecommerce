@@ -1,11 +1,5 @@
 {
-  "include": [
-    "env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "postcss.config.js",
-    "**/**/.server/**/*.ts"
-  ],
+  "include": ["env.d.ts", "**/*.ts", "**/*.tsx", "**/**/.server/**/*.ts"],
   "compilerOptions": {
     "types": ["vitest/globals"],
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
