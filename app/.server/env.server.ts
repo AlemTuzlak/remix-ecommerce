@@ -3,7 +3,8 @@ import { z } from "zod";
 const envSchema = z.object({
   NODE_ENV: z.string(),
   PORT: z.string(),
-  TEST: z.boolean({ coerce: true }),
+  POSTHOG_API_KEY: z.string(),
+  POSTHOG_API_ENDPOINT: z.string(),
 });
 
 let env: ReturnType<typeof initEnv>;

@@ -10,5 +10,3 @@ declare module "vitest" {
     request: Request;
   }
 }
-
-declare const NODE_ENV: "development" | "production";

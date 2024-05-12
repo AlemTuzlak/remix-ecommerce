@@ -19,7 +19,8 @@ export default defineConfig({
     }),
   ],
   define: {
-    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    POSTHOG_API_KEY: JSON.stringify(process.env.POSTHOG_API_KEY),
+    POSTHOG_API_ENDPOINT: JSON.stringify(process.env.POSTHOG_API_ENDPOINT),
   },
   ssr: {
     noExternal: ["remix-i18next"],

@@ -18,12 +18,20 @@ import tailwindcss from "./tailwind.css?url";
 import sprite from "./library/icon/icons/icon.svg?url";
 import { getClientEnv } from "./.server/env.server";
 import { useEffect } from "react";
+import { usePosthogPageView } from "./hooks/posthog/usePosthogPageView";
+import { usePosthogDistinctIdSync } from "./hooks/posthog/usePosthogDistinctIdSync";
+import {
+  capturePosthogServerEvent,
+  getPosthogDistinctId,
+} from "./.server/posthog/init.server";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const lang = returnLanguageIfSupported(params.lang);
   let locale = lang ?? (await i18next.getLocale(request));
   const clientEnv = getClientEnv();
-  return json({ locale, clientEnv });
+  const distinctId = getPosthogDistinctId(request);
+  capturePosthogServerEvent({ event: "server_page_view" }, request);
+  return json({ locale, clientEnv, distinctId });
 }
 
 export const links: LinksFunction = () => [
@@ -52,7 +60,8 @@ export default function App() {
   const { locale, clientEnv } = useLoaderData<typeof loader>();
   const { i18n } = useTranslation();
   useChangeLanguage(locale);
-
+  usePosthogPageView();
+  usePosthogDistinctIdSync();
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.env = clientEnv;
