@@ -6,7 +6,6 @@
   "scripts": {
     "execute": "node --no-warnings --experimental-specifier-resolution=node --loader ./loader.js",
     "script": "npm run execute scripts/setup.ts",
-    "icons": "npm run script scripts/icons.ts",
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
@@ -27,9 +26,9 @@
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
-    "@remix-run/node": "^2.8.0",
-    "@remix-run/react": "^2.8.0",
-    "@remix-run/serve": "^2.8.0",
+    "@remix-run/node": "^2.9.1",
+    "@remix-run/react": "^2.9.1",
+    "@remix-run/serve": "^2.9.1",
     "clsx": "^2.1.0",
     "i18next": "^23.8.2",
     "i18next-browser-languagedetector": "^7.2.0",
@@ -45,7 +44,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@remix-run/dev": "^2.8.0",
+    "@remix-run/dev": "^2.9.1",
     "@types/node": "^20.11.19",
     "@types/prompt": "^1.1.8",
     "@types/react": "^18.2.20",
@@ -72,11 +71,12 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "vite": "^5.0.0",
+    "vite-plugin-icons-spritesheet": "^1.0.0",
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^1.3.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"

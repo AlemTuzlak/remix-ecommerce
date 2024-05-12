@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next/react";
 import { returnLanguageIfSupported } from "./localization/resource";
 import tailwindcss from "./tailwind.css?url";
+import sprite from "./library/icon/icons/icon.svg?url";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const lang = returnLanguageIfSupported(params.lang);
@@ -25,6 +26,12 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindcss },
+  {
+    rel: "preload",
+    href: sprite,
+    as: "image",
+    type: "image/svg+xml",
+  },
 ];
 
 export let handle = {
