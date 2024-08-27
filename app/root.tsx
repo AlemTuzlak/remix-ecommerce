@@ -25,10 +25,10 @@ import {
   getPosthogDistinctId,
 } from "./.server/posthog/init.server";
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
-  const lang = returnLanguageIfSupported(params.lang);
-  let locale = lang ?? (await i18next.getLocale(request));
-  const clientEnv = getClientEnv();
+export async function loader({ request, context }: LoaderFunctionArgs) {
+  const locale = context.locale;
+  const clientEnv = context.clientEnv;
+
   const distinctId = getPosthogDistinctId(request);
   capturePosthogServerEvent({ event: "server_page_view" }, request);
   return json({ locale, clientEnv, distinctId });

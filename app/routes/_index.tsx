@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>{t("hi")}</h1>
