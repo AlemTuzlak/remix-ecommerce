@@ -1,10 +1,12 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  NODE_ENV: z.string(),
-  PORT: z.string(),
-  POSTHOG_API_KEY: z.string(),
-  POSTHOG_API_ENDPOINT: z.string(),
+  NODE_ENV: z.enum(["production", "development", "test"]),
+  PORT: z.string().min(1),
+  POSTHOG_API_KEY: z.string().min(1),
+  POSTHOG_API_ENDPOINT: z.string().min(1),
+  RESEND_API_KEY: z.string().min(1),
+  RESEND_AUDIENCE_ID: z.string().min(1),
 });
 
 let env: ReturnType<typeof initEnv>;

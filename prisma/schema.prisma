@@ -23,3 +23,10 @@ model User {
   lastName  String @default("")
   role      Role   @default(USER)
 }
+
+model Newsletter {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  timestamp DateTime @default(now())
+  token     String   @unique
+}
